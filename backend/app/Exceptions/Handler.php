@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Api\Book\Traits\JsonResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use JsonResponse;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -37,5 +40,15 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($request->is('api/*') || $request->wantsJson() || $request->accepts(['application/json']))
+        {
+           return JsonResponse::badRequest();
+        }
+
+        return parent::render($request, $exception);
     }
 }
