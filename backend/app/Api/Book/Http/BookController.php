@@ -4,6 +4,7 @@ namespace App\Api\Book\Http;
 
 use App\Api\Book\Repositories\PaperBookRepository;
 use App\Api\Book\Services\BookService;
+use App\Api\Book\Validation\BookValidate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +14,7 @@ class BookController extends Controller
 
     public function __construct()
     {
-        $this->bookService = new BookService(new PaperBookRepository());
+        $this->bookService = new BookService(new PaperBookRepository(),new BookValidate());
     }
 
     public function getBooks()
