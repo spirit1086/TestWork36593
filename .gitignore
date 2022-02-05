@@ -1,0 +1,6 @@
+﻿.idea
+conf
+data
+docker-compose.yml
+Dockerfile
+Readme.md
