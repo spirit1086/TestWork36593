@@ -24,7 +24,7 @@ class PaperBook extends Model
      * @return PaperBook[]|\Illuminate\Database\Eloquent\Collection
      */
     public function books($per_page){
-        return PaperBook::where('book_category','=','paper')->paginate($per_page);
+        return PaperBook::where('book_category','=','paper')->orderBy('id','desc')->paginate($per_page);
     }
 
     /**
